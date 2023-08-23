@@ -1,0 +1,19 @@
+name: terraform
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: Terraform deployment
+    uses: iimnd/centralize-workflows/.github/workflows/terraform.yaml@test
+    with:
+      environment: staging
+      aws-region: us-east-1
+      use-kubernetes-provider: false
+      file-paths: '[\"my-cluster\"]' 
+      production-approvers: 'iim'
+      # terraform-operation: destroy
+    secrets:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
